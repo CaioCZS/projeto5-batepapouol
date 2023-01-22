@@ -97,3 +97,7 @@ main{
 .escondido{
     display: none;
 }
+button{
+    background-color:#FFFFFF;
+    border:none;
+}

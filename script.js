@@ -28,7 +28,7 @@ const exibirMensagens = resposta =>{
         textoMsg = mensagemCriada.text;
         typeMsg = mensagemCriada.type;
         idMsg++
-        const template = `<div class="mensagem ${typeMsg} a${idMsg}">
+        const template = `<div data-test="message" class="mensagem ${typeMsg} a${idMsg}">
         <div class="contMensagem">
         <span class="hora">(09:22:28)</span>
         <span class="nomeIdent">${nome}</span> <span class="txtPriv"></span> para 
