@@ -1,3 +1,5 @@
+
+
 const autoScroll = msg =>{
     document.querySelector('.a100').scrollIntoView();
 }
@@ -15,9 +17,8 @@ const addReservadamente = (dest) =>{
     })
 }
 let mainMsg= document.querySelector('main')
-
 const exibirMensagens = resposta =>{
-    console.log('buscou certo as msgs')
+    //console.log('buscou certo as msgs')
     //console.log(resposta.data);
     mainMsg.innerHTML = "";
     let nome,paraQuem,textoMsg,typeMsg;
@@ -27,10 +28,11 @@ const exibirMensagens = resposta =>{
         paraQuem = mensagemCriada.to;
         textoMsg = mensagemCriada.text;
         typeMsg = mensagemCriada.type;
+        tempo = mensagemCriada.time;
         idMsg++
         const template = `<div data-test="message" class="mensagem ${typeMsg} a${idMsg}">
         <div class="contMensagem">
-        <span class="hora">(09:22:28)</span>
+        <span class="hora">(${tempo})</span>
         <span class="nomeIdent">${nome}</span> <span class="txtPriv"></span> para 
         <span class="nomeIdent destinoMsg">${paraQuem}</span>:
         ${textoMsg}</div>
@@ -84,6 +86,28 @@ const perguntarNome = () =>{
     promisseNome.catch(deuErrado);
 }
 perguntarNome()
+
+const sendMsg = () =>{
+const campoEnviar = document.querySelector('input')
+
+const attPagina = erro =>{
+    console.log(erro)
+    if(erro.request.status != 400){
+    alert('ocorreu um erro,por favor digite novamente seu nome')
+    setTimeout( window.location.reload(true) , 1000)
+} 
+}
+
+const corpoMsg={
+    from:nomeUsuario.name,
+    to:"Todos",
+    text:campoEnviar.value,
+    type:"message",
+}
+const promisseMsg = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages' , corpoMsg);
+
+promisseMsg.then(buscarMensagens).catch(attPagina);
+}
 
 
 
