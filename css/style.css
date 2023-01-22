@@ -68,7 +68,7 @@ input::placeholder{
     font-size: 18px;
 }
 main{
-    margin-top:84px;
+    margin-top:78px;
     overflow-x:scroll;
     height: 80%;
 }
@@ -88,9 +88,12 @@ main{
 .nomeIdent{
     font-weight: 700;
 }
-.entrar-sair-sala{
+.status{
     background-color: #DCDCDC;
 }
-.msg-privada{
+.private_message{
     background-color: #FFDEDE;
+}
+.escondido{
+    display: none;
 }
