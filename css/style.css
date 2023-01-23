@@ -54,7 +54,7 @@ header ion-icon{
     font-size:26px;
     
 }
-input{
+.enviarMensagens input{
     border:none;
     width: 90%;    
 }
@@ -62,7 +62,7 @@ input:focus{
     box-shadow: 0 0 0 0;
     outline:0;  
 }
-input::placeholder{
+.enviarMensagens input::placeholder{
     color:black;
     font-style: italic;
     font-size: 18px;
@@ -94,10 +94,53 @@ main{
 .private_message{
     background-color: #FFDEDE;
 }
-.escondido{
-    display: none;
-}
-button{
+
+.enviarMensagens button{
     background-color:#FFFFFF;
     border:none;
+}
+.enviarMensagens button:focus{
+    box-shadow: 0 0 0 0;
+    outline:0;
+}
+.tela-login{
+    width: 375px;
+    height: 100%;
+    background-color: #FFFFFF;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 72px;
+}
+.tela-login img{
+    width: 130px;
+    height: 92px;
+    margin-bottom: 94px;
+}
+
+.tela-login button{
+    width:109px;
+    height: 45px;
+    background-color: #E7E7E7;
+    color:#696969;
+    border:none;
+    border-radius: 9px;
+}
+.tela-login input{
+    width:261px;
+    height: 54px;
+    margin-bottom: 15px;
+    border:solid thin #D7D7D7;
+    text-align: center;
+}
+
+.tela-login input::placeholder{
+text-align: center;
+font-size: 18px;
+color:#AEAEAE;
+}
+.escondido{
+    display: none;
 }

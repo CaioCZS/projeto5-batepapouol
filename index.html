@@ -13,15 +13,22 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <div class="tela-login">
+        <img src="./images/logo 1.png" alt="logo-login">
+        <input data-test="input-name" placeholder="Digite seu nome">
+        <button data-test="send-name" onclick="perguntarNome()">Entrar</button>
+        <img class="loading escondido" src="./images/Loading_icon.gif">
+    </div>
+    
     <div class="conteudoPagina">
         <header>
-            <img src="./images/logo 1.png" class="imgLogo" >
+            <img alt="logo" src="./images/logo 1.png" class="imgLogo" >
             <ion-icon name="people"></ion-icon>
         </header>
         <main></main>
         <div class="enviarMensagens">
             <input  data-test="input-message" type="text" placeholder="Escreva aqui...">
-           <button  data-test="send-message"><ion-icon name="paper-plane-outline" onclick="sendMsg()"></ion-icon></button>
+           <button class="btnSend" onclick="sendMsg()" data-test="send-message"><ion-icon name="paper-plane-outline"></ion-icon></button>
         </div>
     </div>  
 

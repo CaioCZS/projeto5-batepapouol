@@ -1,5 +1,3 @@
-
-
 const autoScroll = msg =>{
     document.querySelector('.a100').scrollIntoView();
 }
@@ -21,7 +19,7 @@ const exibirMensagens = resposta =>{
     //console.log('buscou certo as msgs')
     //console.log(resposta.data);
     mainMsg.innerHTML = "";
-    let nome,paraQuem,textoMsg,typeMsg;
+    let nome,paraQuem,textoMsg,typeMsg,tempo;
     let idMsg=0
     resposta.data.forEach(mensagemCriada => {
         nome = mensagemCriada.from;
@@ -70,33 +68,33 @@ const deuCerto = resposta =>{
     buscarMensagens()
     setInterval(buscarMensagens , 3000)
     setInterval(verificarConec , 5000)
+    document.querySelector('.tela-login').classList.add('escondido')
 }
 
 const deuErrado = erro =>{  
     console.log(erro)
-    alert('Esse nome de usuário já esta online, por favor digite outro')
-    perguntarNome()  
+    alert('Esse nome já está online ou está em branco,por favor digite outro');
+    document.querySelector('.tela-login input').classList.remove('escondido');
+    document.querySelector('.tela-login button').classList.remove('escondido');
+    document.querySelector('.tela-login .loading').classList.add('escondido');
 }
 
 let nomeUsuario;
 const perguntarNome = () =>{
-    nomeUsuario={name: prompt('Qual o seu nome?')};
+    nomeUsuario={
+        name: document.querySelector('.tela-login input').value
+    };
     const promisseNome = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants' ,nomeUsuario);
-    promisseNome.then(deuCerto);
-    promisseNome.catch(deuErrado);
+        promisseNome.then(deuCerto);
+        promisseNome.catch(deuErrado);
+        document.querySelector('.tela-login input').classList.add('escondido');
+        document.querySelector('.tela-login button').classList.add('escondido');
+        document.querySelector('.tela-login .loading').classList.remove('escondido');
 }
-perguntarNome()
 
+const campoEnviar = document.querySelector('.enviarMensagens input')
 const sendMsg = () =>{
-const campoEnviar = document.querySelector('input')
 
-const attPagina = erro =>{
-    console.log(erro)
-    if(erro.request.status != 400){
-    alert('ocorreu um erro,por favor digite novamente seu nome')
-    setTimeout( window.location.reload(true) , 1000)
-} 
-}
 
 const corpoMsg={
     from:nomeUsuario.name,
@@ -104,14 +102,26 @@ const corpoMsg={
     text:campoEnviar.value,
     type:"message",
 }
+campoEnviar.value="";
 const promisseMsg = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages' , corpoMsg);
-
 promisseMsg.then(buscarMensagens).catch(attPagina);
 }
 
+const attPagina = erro =>{
+    console.log(erro)
+    if(erro.request.status !== 400){
+    alert('ocorreu um erro,por favor digite novamente seu nome')
+    setTimeout( window.location.reload(true) , 1000)
+} 
+}
 
 
-
-
+document.addEventListener('keypress',function(e){
+    if(e.key === "Enter"){
+        const botaoSend = document.querySelector('.btnSend');
+        botaoSend.click();
+    }
+}
+)
 
 
