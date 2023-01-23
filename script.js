@@ -1,3 +1,53 @@
+const abrirMenu =() =>{
+    document.querySelector('.menu').classList.toggle('escondido')
+}
+let tipoMensagem;
+const selecionarTipo = tipoClicado => {
+    const tipoAnterior = document.querySelector('.tipos .selecionado');
+    if( tipoAnterior !== null){
+        tipoAnterior.classList.remove("selecionado")
+    } 
+    tipoClicado.classList.add('selecionado');
+    let pub=document.querySelector('.publico');
+    let priv=document.querySelector('.privado');
+    if(tipoClicado.querySelector('p').innerHTML === "Reservadamente"){
+        tipoMensagem = "private_message"
+    }else{
+        tipoMensagem = "message"
+    }
+    console.log(tipoMensagem)
+}
+
+let destinatario;
+const selecinarUsuario = usuarioClicado =>{
+    const usuarioAnterior = document.querySelector('.cttsOnline .selecionado');
+    if(usuarioAnterior !== null){
+        usuarioAnterior.classList.remove("selecionado")
+    } 
+    usuarioClicado.classList.add("selecionado");
+    destinatario = usuarioClicado.querySelector('.nomeUsu').innerHTML;
+}
+const exibirParticipantes = resposta =>{
+    let usuarioName;
+    resposta.data.forEach(nome =>{
+        usuarioName = nome.name;
+        const template=`
+    <div  data-test="participant" onclick="selecinarUsuario(this)" class="opcoes">
+        <ion-icon name="person-circle"></ion-icon>
+        <span class="nomeUsu">${usuarioName}</span>
+        <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
+    </div>
+    `;
+        document.querySelector('.cttsOnline').innerHTML += template
+    })
+}
+
+const buscarParticipante = () =>{
+    const promisseParticipantes = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+
+    promisseParticipantes.then(exibirParticipantes).catch(erroNaBusca)
+}
+
 const autoScroll = msg =>{
     document.querySelector('.a100').scrollIntoView();
 }
@@ -43,6 +93,7 @@ const exibirMensagens = resposta =>{
 
 const erroNaBusca = erro =>{
     console.log('deu erro')
+    console.log(erro)
 }
 
 const buscarMensagens= () =>{
@@ -69,6 +120,9 @@ const deuCerto = resposta =>{
     setInterval(buscarMensagens , 3000)
     setInterval(verificarConec , 5000)
     document.querySelector('.tela-login').classList.add('escondido')
+    buscarParticipante()
+    setInterval(buscarParticipante , 10000)
+    document.querySelector('.nick').innerHTML = nomeUsuario.name
 }
 
 const deuErrado = erro =>{  
@@ -98,9 +152,9 @@ const sendMsg = () =>{
 
 const corpoMsg={
     from:nomeUsuario.name,
-    to:"Todos",
+    to:destinatario,
     text:campoEnviar.value,
-    type:"message",
+    type:tipoMensagem,
 }
 campoEnviar.value="";
 const promisseMsg = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages' , corpoMsg);

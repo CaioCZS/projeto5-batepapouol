@@ -19,11 +19,38 @@
         <button data-test="send-name" onclick="perguntarNome()">Entrar</button>
         <img class="loading escondido" src="./images/Loading_icon.gif">
     </div>
+    <div data-test="overlay" class="menu escondido">
+        <div onclick="abrirMenu()" class="voltar"></div>
+        <div class="sidebar">
+            <div class="nick"></div>
+            <h1>Escolha um contato<br>para enviar mensagem:</h1>
+            <div class="cttsOnline">
+                <div data-test="all" onclick="selecinarUsuario(this)" class="opcoes usuario">
+                    <ion-icon name="people"></ion-icon>
+                    <span class="nomeUsu">Todos</span>
+                    <ion-icon data-test="check" class="check" name="checkmark"></ion-icon>
+                </div>
+            </div>
+            <h1>Escolha a visibilidade</h1>
+            <div class="tipos">
+            <div onclick="selecionarTipo(this)" data-test="public" class="opcoes publico">
+                <ion-icon name="lock-open"></ion-icon>
+               <p>Público</p>
+               <ion-icon class="check" data-test="check" name="checkmark"></ion-icon>
+            </div>
+            <div onclick="selecionarTipo(this)" data-test="private" class="opcoes privado">
+                <ion-icon name="lock-closed"></ion-icon>
+                <p>Reservadamente</p>
+                <ion-icon class="check" data-test="check" name="checkmark"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="conteudoPagina">
         <header>
             <img alt="logo" src="./images/logo 1.png" class="imgLogo" >
-            <ion-icon name="people"></ion-icon>
+            <button data-test="open-participants" onclick="abrirMenu()"><ion-icon name="people"></ion-icon></button>
         </header>
         <main></main>
         <div class="enviarMensagens">

@@ -141,6 +141,70 @@ text-align: center;
 font-size: 18px;
 color:#AEAEAE;
 }
+.menu{
+    width: 375px;
+    height: 100%;
+    position:fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: flex-end;
+}
+.sidebar{
+    width: 259px;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+h1{
+    height: 80px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:16px;
+    font-weight: 700;
+    line-height: 19px;
+}
+.nick{
+    width: 100%;
+    text-align: center;
+    font-size:20px;
+    font-weight: 700;
+}
+.cttsOnline{
+    width: 100%;
+    height: 35%;
+    overflow-x: scroll;
+}
+
+.opcoes ion-icon{
+    font-size: 22px;
+    margin-right: 7px;
+}
+
+.opcoes{
+height: 36px;
+font-size: 16px;
+display: flex;
+align-items: center;
+padding-left: 10px;
+margin-bottom: 4px;
+}
+.voltar{
+    width: 116px;
+}
+.check{
+position: absolute;
+right: 0;
+color:#FFFFFF;
+}
+
+.selecionado .check{
+  color:#28BB25;
+}
+
 .escondido{
     display: none;
 }
